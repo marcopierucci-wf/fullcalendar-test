@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='fullcalendar.css' rel='stylesheet' />
+<script src='jquery-1.7.2.min.js'></script>
+<script src='fullcalendar.min.js'></script>
+<script>
+
+	$(function() {
+    	
+    	$calendar = $("#calendar"); 	
+    	$calendarInit = $("#calendarInit");
+    	$calendarDestroy = $("#calendarDestroy");
+    	$addEvent = $("#addEvent");
+    	$removeEvents = $("#removeEvents");
+	
+		$calendarInit.click(function(){
+			$calendar.fullCalendar();
+		});
+
+		$calendarDestroy.click(function(){
+			$calendar.fullCalendar('destroy');
+			$calendar.remove();
+			$calendar = null;
+		});
+
+		$addEvent.click(function(){
+			date = new Date();
+			var randomDateThisMonth = date.getFullYear().toString() + '-' + (date.getMonth()+1).toString() + '-' + Math.floor((Math.random() * 31));
+			
+			newEvent = {
+				title:'Event',
+				start: randomDateThisMonth,
+				end: randomDateThisMonth,
+			}
+
+			$calendar.fullCalendar('renderEvent', newEvent);
+			date = null;
+			randomDateThisMonth = null;
+			newEvent = null;
+		});
+
+		$removeEvents.click(function(){
+			$calendar.fullCalendar('removeEvents');
+		});
+	});
+</script>
+<style>
+	body {
+		margin-top: 40px;
+		font-size: 16px;
+		font-family: "Lucida Grande",Helvetica,Arial,Verdana,sans-serif
+		}
+	button{
+		font-size: 16px;
+	}y
+
+	#calendar {
+			width: 900px;
+		}
+
+</style>
+</head>
+<body>
+<button id="calendarInit">Initialize Calendar</button> 
+<button id="calendarDestroy">Destroy Calendar</button> 
+<button id="addEvent">Add Event</button> 
+<button id="removeEvents">Remove Events</button>
+<br /><br />
+
+<div id='calendar'></div>
+</body>
+</html>

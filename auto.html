@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html>
+<head>
+<link href='fullcalendar.css' rel='stylesheet' />
+<script src='jquery-1.7.2.min.js'></script>
+<script src='fullcalendar.min.js'></script>
+</head>
+<body>
+<div id='calendar'></div>
+<script>
+function run(){
+$calendar = $("#calendar");
+// init calendar
+$calendar.fullCalendar();
+// add random events in this month
+
+for (var i=0; i<200; i++){
+	date = new Date();
+	var randomDateThisMonth = date.getFullYear().toString() + '-' + (date.getMonth()+1).toString() + '-' + Math.floor((Math.random() * 31));
+	
+	var newEvent = {
+		title:'Event',
+		start: randomDateThisMonth,
+		end: randomDateThisMonth,
+	}
+
+	$calendar.fullCalendar('renderEvent', newEvent);
+	date = null;
+	randomDateThisMonth = null;
+	newEvent = null;
+}
+
+$calendar.fullCalendar('removeEvents');
+$calendar.fullCalendar('destroy');
+$calendar.remove();
+}
+
+run();
+</script>
+</body>
+</html>
